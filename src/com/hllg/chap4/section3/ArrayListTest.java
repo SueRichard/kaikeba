@@ -16,5 +16,7 @@ public class ArrayListTest {
         //返回永远为true
         //只有第一次添加，才会把长度设为10
         list.add(1);
+        list.add(0, 10);
+        System.out.println(list.get(0));
     }
 }
