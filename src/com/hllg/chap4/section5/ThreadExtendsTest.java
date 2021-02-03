@@ -14,16 +14,16 @@ public class ThreadExtendsTest {
 //            System.out.println("这是主线程的操作"+i);
 //        }
         //方式二：
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
-                for (int i =0; i<10;i++){
-                    System.out.println("这是子进程"+i);
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("这是子进程" + i);
                 }
             }
         }.start();
-        for (int i =0; i<10;i++){
-            System.out.println("这是主进程"+i);
+        for (int i = 0; i < 10; i++) {
+            System.out.println("这是主进程" + i);
         }
     }
 }

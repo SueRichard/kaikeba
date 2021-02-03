@@ -14,7 +14,7 @@ public class NewThread extends Thread {
         //线程共享一个堆内存，但是栈内存独有
         //由一个线程调用的方法，那么这个方法也会执行在这个线程里面，即出栈入栈
         for (int i = 0; i < 10; i++) {
-            System.out.println("这是子线程的操作"+i);
+            System.out.println("这是子线程的操作" + i);
         }
     }
 }
