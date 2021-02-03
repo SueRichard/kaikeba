@@ -39,6 +39,6 @@ public class FileTest {
 //        f6.renameTo(f7);
         //----------------------
         //改变了
-        //测试git版本的改动
+        //测试git版本的改动，测试用
     }
 }
