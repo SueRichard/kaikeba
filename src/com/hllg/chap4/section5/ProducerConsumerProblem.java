@@ -1,6 +1,8 @@
 package com.hllg.chap4.section5;
 
 /**
+ * 多线程通信问题，生产者和消费者问题
+ *
  * @author HLLG
  * @version 1.0
  * @create 04/02/2021  16:13
@@ -65,6 +67,8 @@ public class ProducerConsumerProblem {
     static class Food {
         private String name;
         private String taste;
+        //追加一个标志位，true表示可以生产
+        private boolean flag = true;
 
         /**
          * 对改方法追加同步，但却不能解决问题
@@ -72,19 +76,43 @@ public class ProducerConsumerProblem {
          * 就导致厨师做了多个菜，但是没来得及端出，然后最后厨师先做完了，服务员在重复端厨师做的最后一个菜
          */
         public synchronized void setNameAndTaste(String name, String taste) {
-            this.name = name;
-            try {
-                //制造时间片隙
-                Thread.sleep(100);
-                //菜名改了，但是味道没有改，被服务员线程抢占了
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (flag) {
+                this.name = name;
+                try {
+                    //制造时间片隙
+                    Thread.sleep(100);
+                    //菜名改了，但是味道没有改，被服务员线程抢占了
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                this.taste = taste;
+                //更改标志位，让服务员可以取
+                flag = false;
+                //唤醒其他线程，该方法来源于Object
+                this.notifyAll();
+                try {
+                    //自己等待
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            this.taste = taste;
         }
 
         public synchronized void take() {
-            System.out.println("服务员端走的菜是：" + name + "，味道：" + taste);
+            if (!flag) {
+                System.out.println("服务员端走的菜是：" + name + "，味道：" + taste);
+                //更改标志位，让厨师做
+                flag = true;
+                //通知其他所有该对象下的线程
+                this.notifyAll();
+                try {
+                    //阻塞自己
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
