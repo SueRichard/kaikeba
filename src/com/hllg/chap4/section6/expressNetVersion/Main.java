@@ -2,13 +2,10 @@ package com.hllg.chap4.section6.expressNetVersion;
 
 import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDao;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
-import com.hllg.chap4.section6.expressNetVersion.util.Serializable;
 import com.hllg.chap4.section6.expressNetVersion.util.SocketUtil;
 import com.hllg.chap4.section6.expressNetVersion.view.View;
 
 import java.io.*;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,8 +42,9 @@ public class Main {
 
     }
 
-    private static void store() {
-
+    private static boolean store() {
+        SocketUtil.submitDate(expressDao.getList());
+        return true;
     }
 
     private static void init() throws IOException {
@@ -80,7 +78,7 @@ public class Main {
         boolean flag = true;
         while (flag) {
             v.courierMenu();
-            int key = v.inputResult(5);
+            int key = v.inputResult(6);
             switch (key) {
                 case 1:
                     add();
@@ -95,6 +93,10 @@ public class Main {
                     selectAll();
                     break;
                 case 5:
+                    boolean storeFlag = store();
+                    v.printStoreResult(storeFlag);
+                    break;
+                case 6:
                     flag = false;
                     v.backPrevious();
                     break;

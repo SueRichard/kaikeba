@@ -30,15 +30,18 @@ public class SocketUtil {
     public static List<Express> loadDate() {
         List<Express> list = Collections.synchronizedList(new ArrayList<>());
 
-        try (InputStream is = socket.getInputStream()) {
+        try {
+            InputStream is = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String data = br.readLine();
             String[] all = data.split(" ");
             String[] specify = {};
-            for (String s : all) {
-                specify = s.split(",");
-                Express e = new Express(specify[0], specify[1], Integer.parseInt(specify[2]), Integer.parseInt(specify[3]));
-                list.add(e);
+            if (all.length > 1) {
+                for (String s : all) {
+                    specify = s.split(",");
+                    Express e = new Express(specify[0], specify[1], Integer.parseInt(specify[2]), Integer.parseInt(specify[3]));
+                    list.add(e);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,12 +50,15 @@ public class SocketUtil {
     }
 
     public static void submitDate(List<Express> list) {
-        try (OutputStream os = socket.getOutputStream(); PrintWriter pw = new PrintWriter(os, true)) {
-            StringBuffer br = new StringBuffer();
+        try {
+            OutputStream os = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(os, true);
+            StringBuffer data = new StringBuffer();
             for (Express e : list) {
-                br.append(e.getNum()).append(",").append(e.getCompany()).append(",").append(e.getCode()).append(",").append(e.getLocation()).append(" ");
+                data.append(e.getNum()).append(",").append(e.getCompany()).append(",").append(e.getCode()).append(",").append(e.getLocation()).append(" ");
             }
-            pw.println(br);
+            pw.println(data);
+            pw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -24,14 +24,15 @@ public class MainServer {
             new Thread("服务器线程：" + count) {
                 @Override
                 public void run() {
-                    try(OutputStream os = socket.getOutputStream();PrintWriter pw = new PrintWriter(os);) {
+                    try {
+                        OutputStream os = socket.getOutputStream();
                         System.out.println(Thread.currentThread().getName() + "启动完成");
-
+                        PrintWriter pw = new PrintWriter(os);
                         BufferedReader br = new BufferedReader(new FileReader(LOCATION));
                         StringBuffer result = new StringBuffer();
-                        while(true){
+                        while (true) {
                             String temp = br.readLine();
-                            if (temp==null){
+                            if (temp == null) {
                                 break;
                             }
                             result.append(temp);
@@ -43,9 +44,12 @@ public class MainServer {
                         e.printStackTrace();
                     }
                     //---------------------
-                    try {
+                    try (FileWriter fw = new FileWriter(new File(LOCATION))) {
                         InputStream is = socket.getInputStream();
-
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String data = br.readLine();
+                        fw.write(data);
+                        fw.flush();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

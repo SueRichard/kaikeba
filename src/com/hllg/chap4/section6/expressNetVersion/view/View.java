@@ -77,7 +77,7 @@ public class View {
     }
 
     public void courierMenu() {
-        System.out.println("1.添加快递 2.修改快点 3.删除快递 4.查询所有快递 5.返回上一层菜单");
+        System.out.println("1.添加快递 2.修改快点 3.删除快递 4.查询所有快递 5.提交修改 6.返回上一层菜单");
     }
 
     public void display(List<Express> list) {
@@ -151,5 +151,9 @@ public class View {
 
     public void nothing() {
         print("快递柜为空，请先存储！");
+    }
+
+    public void printStoreResult(boolean storeFlag) {
+        System.out.println(storeFlag?"提交修改成功":"提交修改失败");
     }
 }
