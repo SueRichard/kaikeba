@@ -14,6 +14,7 @@ public class PrintExceptionTest {
     public static void main(String[] args) throws FileNotFoundException {
         try {
             String t = null;
+            //制造异常
             t.toString();
         }catch (Exception e){
             PrintWriter pw = new PrintWriter("l://bug.txt");
