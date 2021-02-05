@@ -15,13 +15,13 @@ import java.util.List;
  * @version 2.0
  * @create 2021年2月2日18:37:10
  */
-public class App {
+public class Main {
     static View v = new View();
     static ExpressDao expressDao = new ExpressDao();
     final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
 
-    public static void entry() {
-        init();
+    public static void main(String[] args) {
+        //init();
         v.welcome();
         boolean flag = true;
         while (flag) {
@@ -36,7 +36,7 @@ public class App {
                     break;
                 case 3:
                     flag = false;
-                    store();
+                    //store();
                     v.bye();
                     break;
             }

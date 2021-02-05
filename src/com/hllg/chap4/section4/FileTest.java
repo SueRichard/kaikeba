@@ -29,9 +29,9 @@ public class FileTest {
 //        f5.createNewFile();
         //为空才可以删文件夹
         //f3.delete();
-        //路径分隔符，推荐这个写法
+        //路径分隔符  ;   ，推荐这个写法
         System.out.println(File.pathSeparator);
-        //名称分隔符
+        //名称分隔符\
         System.out.println(File.separator);
         //rename
 //        File f6 = new File("l:1.txt");

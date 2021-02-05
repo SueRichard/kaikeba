@@ -35,5 +35,13 @@ public class PrintStreamAndBufferedReaderTest {
         BufferedReader br = new BufferedReader(fr);
         String text = br.readLine();
         System.out.println(text);
+        text = br.readLine();
+        System.out.println(text);
+        text = br.readLine();
+        System.out.println(text);
+        text = br.readLine();
+        System.out.println(text);
+        text = br.readLine();
+        System.out.println(text);
     }
 }
