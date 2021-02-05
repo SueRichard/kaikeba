@@ -3,6 +3,8 @@ package com.hllg.chap4.section6.expressNetVersion.dao;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public class ExpressDao implements Serializable {
     private static final int MAX_SIZE = 100;
     //private ArrayList<Express> list ;
     //多线程需要满足线程安全，选择Collections.synchronizedList(new ArrayList<>())方式
-    private List<Express> list;
+    private List<Express> list = Collections.synchronizedList(new ArrayList<>());
 
     public static int getMaxSize() {
         return MAX_SIZE;

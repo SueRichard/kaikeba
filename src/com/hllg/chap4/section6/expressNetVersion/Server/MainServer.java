@@ -24,9 +24,9 @@ public class MainServer {
             new Thread("服务器线程：" + count) {
                 @Override
                 public void run() {
-                    try {
+                    try(OutputStream os = socket.getOutputStream();PrintWriter pw = new PrintWriter(os);) {
                         System.out.println(Thread.currentThread().getName() + "启动完成");
-                        OutputStream os = socket.getOutputStream();
+
                         BufferedReader br = new BufferedReader(new FileReader(LOCATION));
                         StringBuffer result = new StringBuffer();
                         while(true){
@@ -36,8 +36,16 @@ public class MainServer {
                             }
                             result.append(temp);
                         }
-                        PrintWriter pw = new PrintWriter(os);
+
                         pw.println(result);
+                        pw.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //---------------------
+                    try {
+                        InputStream is = socket.getInputStream();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

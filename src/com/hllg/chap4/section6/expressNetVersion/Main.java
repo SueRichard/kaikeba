@@ -3,10 +3,11 @@ package com.hllg.chap4.section6.expressNetVersion;
 import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDao;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
 import com.hllg.chap4.section6.expressNetVersion.util.Serializable;
+import com.hllg.chap4.section6.expressNetVersion.util.SocketUtil;
 import com.hllg.chap4.section6.expressNetVersion.view.View;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class Main {
     static ExpressDao expressDao = new ExpressDao();
     final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
 
-    public static void main(String[] args) {
-        //init();
+    public static void main(String[] args) throws IOException {
+        init();
         v.welcome();
         boolean flag = true;
         while (flag) {
@@ -36,7 +37,7 @@ public class Main {
                     break;
                 case 3:
                     flag = false;
-                    //store();
+                    store();
                     v.bye();
                     break;
             }
@@ -45,25 +46,11 @@ public class Main {
     }
 
     private static void store() {
-        try {
-            Serializable.serialize(expressDao.getList(), PATH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private static void init() {
-        try {
-            File data = new File(PATH);
-            if (!data.exists()) {
-                data.createNewFile();
-            }
-            expressDao.setList((List<Express>) Serializable.deserialize(PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    private static void init() throws IOException {
+        expressDao.setList(SocketUtil.loadDate());
     }
 
     private static void userMenu() {
