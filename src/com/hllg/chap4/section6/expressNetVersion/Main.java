@@ -19,7 +19,7 @@ public class Main {
     final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
 
     public static void main(String[] args) throws IOException {
-        init();
+        getDate();
         v.welcome();
         boolean flag = true;
         while (flag) {
@@ -34,7 +34,6 @@ public class Main {
                     break;
                 case 3:
                     flag = false;
-                    store();
                     v.bye();
                     break;
             }
@@ -42,16 +41,16 @@ public class Main {
 
     }
 
-    private static boolean store() {
+    private static boolean storeDate() {
         SocketUtil.submitDate(expressDao.getList());
         return true;
     }
 
-    private static void init() throws IOException {
+    private static void getDate() throws IOException {
         expressDao.setList(SocketUtil.loadDate());
     }
 
-    private static void userMenu() {
+    private static void userMenu() throws IOException {
         boolean flag = true;
         while (flag) {
             v.userMenu();
@@ -74,14 +73,18 @@ public class Main {
         v.printPickResult(flag);
     }
 
-    private static void courierMenu() {
+    private static void courierMenu() throws IOException {
         boolean flag = true;
         while (flag) {
             v.courierMenu();
-            int key = v.inputResult(6);
+            int key = v.inputResult(5);
             switch (key) {
                 case 1:
                     add();
+                    storeDate();//只能刷新一次？
+                    /**
+                     * 这么垃圾？
+                     */
                     break;
                 case 2:
                     update();
@@ -93,10 +96,6 @@ public class Main {
                     selectAll();
                     break;
                 case 5:
-                    boolean storeFlag = store();
-                    v.printStoreResult(storeFlag);
-                    break;
-                case 6:
                     flag = false;
                     v.backPrevious();
                     break;
@@ -105,12 +104,12 @@ public class Main {
     }
 
     private static void selectAll() {
-        List<Express> list = expressDao.query();
-        if (list == null) {
-            v.nothing();
-        } else {
-            v.display(list);
-        }
+            List<Express> list = expressDao.query();
+            if (list == null) {
+                v.nothing();
+            } else {
+                v.display(list);
+            }
     }
 
     private static void delete() {
