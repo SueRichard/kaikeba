@@ -1,6 +1,7 @@
 package com.hllg.chap4.section6.expressNetVersion;
 
-import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDao;
+import com.hllg.chap4.section6.expressNetVersion.Client.ExpressClient;
+import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDaoImpl;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
 import com.hllg.chap4.section6.expressNetVersion.util.SocketUtil;
 import com.hllg.chap4.section6.expressNetVersion.view.View;
@@ -15,11 +16,12 @@ import java.util.List;
  */
 public class Main {
     static View v = new View();
-    static ExpressDao expressDao = new ExpressDao();
-    final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
+//    static ExpressDaoImpl expressDaoImpl = new ExpressDaoImpl();
+    //final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
+    static ExpressClient client = new ExpressClient();
 
-    public static void main(String[] args) throws IOException {
-        getDate();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //getDate();
         v.welcome();
         boolean flag = true;
         while (flag) {
@@ -34,6 +36,7 @@ public class Main {
                     break;
                 case 3:
                     flag = false;
+                    client.closeSocket();
                     v.bye();
                     break;
             }
@@ -41,14 +44,14 @@ public class Main {
 
     }
 
-    private static boolean storeDate() {
-        SocketUtil.submitDate(expressDao.getList());
-        return true;
-    }
+//    private static boolean storeDate() {
+//        SocketUtil.submitDate(expressDaoImpl.getList());
+//        return true;
+//    }
 
-    private static void getDate() throws IOException {
-        expressDao.setList(SocketUtil.loadDate());
-    }
+//    private static void getDate() throws IOException {
+//        expressDaoImpl.setList(SocketUtil.loadDate());
+//    }
 
     private static void userMenu() throws IOException {
         boolean flag = true;
@@ -67,13 +70,13 @@ public class Main {
         }
     }
 
-    private static void pick() {
+    private static void pick() throws IOException {
         int code = v.getCode();
-        boolean flag = expressDao.pickExpress(code);
+        boolean flag = client.pickExpress(code);
         v.printPickResult(flag);
     }
 
-    private static void courierMenu() throws IOException {
+    private static void courierMenu() throws IOException, ClassNotFoundException {
         boolean flag = true;
         while (flag) {
             v.courierMenu();
@@ -81,10 +84,6 @@ public class Main {
             switch (key) {
                 case 1:
                     add();
-                    storeDate();//只能刷新一次？
-                    /**
-                     * 这么垃圾？
-                     */
                     break;
                 case 2:
                     update();
@@ -103,38 +102,43 @@ public class Main {
         }
     }
 
-    private static void selectAll() {
-            List<Express> list = expressDao.query();
-            if (list == null) {
-                v.nothing();
-            } else {
-                v.display(list);
-            }
+    private static void selectAll() throws IOException, ClassNotFoundException {
+        List<Express> list = client.query();
+        if (list == null) {
+            v.nothing();
+        } else {
+            v.display(list);
+        }
     }
 
-    private static void delete() {
+    private static void delete() throws IOException {
         String num = v.getNum();
-        boolean result = expressDao.delete(num);
+        boolean result = client.delete(num);
         v.printDeleteResult(result);
     }
 
-    private static void update() {
+    private static void update() throws IOException, ClassNotFoundException {
         String oldNum = v.getNum();
-        Express result = expressDao.findByNum(oldNum);
+        Express result = client.findByNum(oldNum);
         if (result == null) {
             v.printNotFound();
             return;
         }
-        String newNum = v.getNewNum();
-        String newComp = v.getNewComp();
-        Express e = expressDao.update(oldNum, newNum, newComp);
+        Express newExpress = v.getNewExpress();
+        Express e = client.update(new Express(oldNum,null),newExpress);
         v.printUpdateResult(e);
     }
 
-    private static void add() {
-        String num = v.getNum();
-        String comp = v.getComp();
-        Express e = expressDao.add(num, comp);
-        v.printAddResult(e);
+    private static void add() throws IOException, ClassNotFoundException {
+        //检查是否满
+        if (client.isFull()) {
+            v.full();
+            return;
+        }
+        Express e = v.inputExpress();
+        //Express e = expressDaoImpl.add(num, comp);
+        //交给客户端处理
+        Express add = client.addExpress(e);
+        v.printAddResult(add);
     }
 }

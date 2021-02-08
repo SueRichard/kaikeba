@@ -127,15 +127,15 @@ public class View {
      */
     private String showLocation(Express e) {
         //注意除数为0，余数为0的情况
-        return (e.getLocation() / 10+1) + "排" + (e.getLocation() % 10+1) + "列";
+        return (e.getLocation() / 10 + 1) + "排" + (e.getLocation() % 10 + 1) + "列";
     }
 
     public int getCode() {
         int code = 0;
         String temp = getInputByMessage("请输入取件码：");
-        try{
+        try {
             code = Integer.parseInt(temp);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
 
         }
         return code;
@@ -154,6 +154,22 @@ public class View {
     }
 
     public void printStoreResult(boolean storeFlag) {
-        System.out.println(storeFlag?"提交修改成功":"提交修改失败");
+        System.out.println(storeFlag ? "提交修改成功" : "提交修改失败");
+    }
+
+    public Express inputExpress() {
+        String num = getInputByMessage("请输入快递单号：");
+        String comp = getInputByMessage("请输入快递公司：");
+        return new Express(num, comp);
+    }
+
+    public void full() {
+        print("快递柜已满");
+    }
+
+    public Express getNewExpress() {
+        String num = getInputByMessage("请输入新的快递单号：");
+        String comp = getInputByMessage("请输入新的快递公司：");
+        return new Express(num, comp);
     }
 }
