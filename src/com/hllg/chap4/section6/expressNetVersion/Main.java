@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Main {
     static View v = new View();
-//    static ExpressDaoImpl expressDaoImpl = new ExpressDaoImpl();
+    //    static ExpressDaoImpl expressDaoImpl = new ExpressDaoImpl();
     //final static String PATH = "src/com/hllg/chap4/section6/expressNetVersion/data.txt";
     static ExpressClient client = new ExpressClient();
 
@@ -34,22 +34,13 @@ public class Main {
                     break;
                 case 3:
                     flag = false;
-                    client.closeSocket();
+                    client.closeSocket();//退出程序关闭socket
                     v.bye();
                     break;
             }
         }
 
     }
-
-//    private static boolean storeDate() {
-//        SocketUtil.submitDate(expressDaoImpl.getList());
-//        return true;
-//    }
-
-//    private static void getDate() throws IOException {
-//        expressDaoImpl.setList(SocketUtil.loadDate());
-//    }
 
     private static void userMenu() throws IOException {
         boolean flag = true;
@@ -123,7 +114,7 @@ public class Main {
             return;
         }
         Express newExpress = v.getNewExpress();
-        Express e = client.update(new Express(oldNum,null),newExpress);
+        Express e = client.update(new Express(oldNum, null), newExpress);
         v.printUpdateResult(e);
     }
 
@@ -134,7 +125,6 @@ public class Main {
             return;
         }
         Express e = v.inputExpress();
-        //Express e = expressDaoImpl.add(num, comp);
         //交给客户端处理
         Express add = client.addExpress(e);
         v.printAddResult(add);

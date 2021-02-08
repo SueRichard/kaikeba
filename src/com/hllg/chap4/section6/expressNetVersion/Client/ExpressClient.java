@@ -1,7 +1,7 @@
 package com.hllg.chap4.section6.expressNetVersion.Client;
 
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
-import com.hllg.chap4.section6.expressNetVersion.util.MsgUtil;
+import com.hllg.chap4.section6.expressNetVersion.util.MsgUtils;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -11,6 +11,7 @@ import java.util.List;
  * @author HLLG
  * @version 1.0
  * @time 2021/02/08  Mon  07:44
+ * 所有的方法都交给服务器调用，只收取服务端的结果
  */
 public class ExpressClient {
     private Socket socket;
@@ -32,8 +33,8 @@ public class ExpressClient {
     }
 
     public boolean isFull() throws IOException {
-        MsgUtil.sendCmd(socket, MsgUtil.CMD_CHECK_FULL);
-        return MsgUtil.receiveBoolean(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_CHECK_FULL);
+        return MsgUtils.receiveBoolean(socket);
     }
 
     /**
@@ -43,38 +44,38 @@ public class ExpressClient {
      * @return
      */
     public Express addExpress(Express e) throws IOException, ClassNotFoundException {
-        MsgUtil.sendCmd(socket, MsgUtil.CMD_ADD);
-        MsgUtil.sendExpress(socket, e);
-        return MsgUtil.receiveExpress(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_ADD);
+        MsgUtils.sendExpress(socket, e);
+        return MsgUtils.receiveExpress(socket);
     }
 
     public Express findByNum(String oldNum) throws IOException, ClassNotFoundException {
-        MsgUtil.sendCmd(socket, MsgUtil.CMD_FIND_NUMBER);
-        MsgUtil.sendString(socket, oldNum);
-        return MsgUtil.receiveExpress(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_FIND_NUMBER);
+        MsgUtils.sendString(socket, oldNum);
+        return MsgUtils.receiveExpress(socket);
     }
 
     public Express update(Express oldExpress,Express newExpress) throws IOException, ClassNotFoundException {
-        MsgUtil.sendCmd(socket, MsgUtil.CMD_UPDATE);
-        MsgUtil.sendExpress(socket,oldExpress);
-        MsgUtil.sendExpress(socket, newExpress);
-        return MsgUtil.receiveExpress(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_UPDATE);
+        MsgUtils.sendExpress(socket,oldExpress);
+        MsgUtils.sendExpress(socket, newExpress);
+        return MsgUtils.receiveExpress(socket);
     }
 
     public boolean delete(String num) throws IOException {
-        MsgUtil.sendCmd(socket,MsgUtil.CMD_DELETE);
-        MsgUtil.sendString(socket,num);
-        return MsgUtil.receiveBoolean(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_DELETE);
+        MsgUtils.sendString(socket,num);
+        return MsgUtils.receiveBoolean(socket);
     }
 
     public List<Express> query() throws IOException, ClassNotFoundException {
-        MsgUtil.sendCmd(socket,MsgUtil.CMD_QUERY_ALL);
-        return MsgUtil.receiveList(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_QUERY_ALL);
+        return MsgUtils.receiveList(socket);
     }
 
     public boolean pickExpress(int code) throws IOException {
-        MsgUtil.sendCmd(socket,MsgUtil.CMD_PICK);
-        MsgUtil.sendInt(socket,code);
-        return MsgUtil.receiveBoolean(socket);
+        MsgUtils.sendCmd(socket, MsgUtils.CMD_PICK);
+        MsgUtils.sendInt(socket,code);
+        return MsgUtils.receiveBoolean(socket);
     }
 }

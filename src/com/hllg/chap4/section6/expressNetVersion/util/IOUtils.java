@@ -11,6 +11,7 @@ import java.util.List;
  * @author HLLG
  * @version 1.0
  * @time 2021/02/07  Sun  21:50
+ * 进行文件的写入写出
  */
 public class IOUtils {
     private static File file = new File("src/com/hllg/chap4/section6/expressNetVersion/data.txt");

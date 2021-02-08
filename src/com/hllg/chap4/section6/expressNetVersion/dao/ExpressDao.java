@@ -8,6 +8,7 @@ import java.util.List;
  * @author HLLG
  * @version 1.0
  * @time 2021/02/08  Mon  07:26
+ * 所有express的对外接口方法
  */
 public interface ExpressDao {
 
@@ -15,7 +16,7 @@ public interface ExpressDao {
 
     boolean delete(String num);
 
-    Express update(Express oldExpress,Express newExpress);
+    Express update(Express oldExpress, Express newExpress);
 
     int initCode();
 
@@ -25,7 +26,7 @@ public interface ExpressDao {
 
     boolean findByLocation(int loc);
 
-     Express findByNum(String num);
+    Express findByNum(String num);
 
     int findIndexByNum(String num);
 

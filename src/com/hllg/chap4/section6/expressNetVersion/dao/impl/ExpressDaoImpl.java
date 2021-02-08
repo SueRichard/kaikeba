@@ -13,12 +13,12 @@ import java.util.List;
  * @author HLLG
  * @version 1.0
  * @create 31/01/2021  22:51
+ * 接口实现类
  */
 public class ExpressDaoImpl implements Serializable, ExpressDao {
     private static final int MAX_SIZE = 100;
-    //private ArrayList<Express> list ;
     //多线程需要满足线程安全，选择Collections.synchronizedList(new ArrayList<>())方式
-    private List<Express> list = Collections.synchronizedList(new ArrayList<>());
+    private List<Express> list;
 
     {
         //初始化读取数据
