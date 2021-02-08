@@ -2,7 +2,7 @@ package com.hllg.chap4.section6.expressNetVersion.Server;
 
 
 import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDao;
-import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDaoImpl;
+import com.hllg.chap4.section6.expressNetVersion.dao.impl.ExpressDaoImpl;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
 import com.hllg.chap4.section6.expressNetVersion.util.MsgUtil;
 

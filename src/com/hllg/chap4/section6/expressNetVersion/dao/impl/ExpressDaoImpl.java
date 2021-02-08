@@ -1,5 +1,6 @@
-package com.hllg.chap4.section6.expressNetVersion.dao;
+package com.hllg.chap4.section6.expressNetVersion.dao.impl;
 
+import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDao;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
 import com.hllg.chap4.section6.expressNetVersion.util.IOUtils;
 

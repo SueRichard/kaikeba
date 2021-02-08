@@ -1,9 +1,7 @@
 package com.hllg.chap4.section6.expressNetVersion;
 
 import com.hllg.chap4.section6.expressNetVersion.Client.ExpressClient;
-import com.hllg.chap4.section6.expressNetVersion.dao.ExpressDaoImpl;
 import com.hllg.chap4.section6.expressNetVersion.entity.Express;
-import com.hllg.chap4.section6.expressNetVersion.util.SocketUtil;
 import com.hllg.chap4.section6.expressNetVersion.view.View;
 
 import java.io.*;
