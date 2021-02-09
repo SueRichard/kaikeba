@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+    <person id="001">
+        <name>hl</name>
+        <sex>女</sex>
+        <info>lp</info>
+    </person>
+    <person id="002">
+        <!--
+        这是注释-->
+        <name>33<![CDATA[这是不被解析的<a></a>]]></name>
+        <sex>女</sex>
+        <info>我……</info>
+    </person>
+    <person id="003">
+        <name>hh</name>
+        <sex>男</sex>
+        <info>我自己</info>
+    </person>
+</persons>
