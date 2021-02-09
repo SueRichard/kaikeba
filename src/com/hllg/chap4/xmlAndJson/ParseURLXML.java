@@ -7,7 +7,6 @@ import org.dom4j.io.SAXReader;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -19,7 +18,7 @@ import java.net.URLConnection;
  */
 public class ParseURLXML {
     public static void main(String[] args) throws IOException, DocumentException {
-        String phone = "18801148532";
+        String phone = "18205624169";
         URL url = new URL("http://apis.juhe.cn/mobile/get?phone=" + phone + "&dtype=xml&key=9f3923e8f87f1ea50ed4ec8c39cc9253");
         URLConnection conn = url.openConnection();
         InputStream is = conn.getInputStream();

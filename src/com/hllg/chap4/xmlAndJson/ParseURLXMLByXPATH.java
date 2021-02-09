@@ -2,7 +2,6 @@ package com.hllg.chap4.xmlAndJson;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
@@ -19,7 +18,7 @@ import java.net.URLConnection;
  */
 public class ParseURLXMLByXPATH {
     public static void main(String[] args) throws IOException, DocumentException {
-        String phone = "18801148532";
+        String phone = "18205624169";
         URL url = new URL("http://apis.juhe.cn/mobile/get?phone=" + phone + "&dtype=xml&key=9f3923e8f87f1ea50ed4ec8c39cc9253");
         URLConnection conn = url.openConnection();
         InputStream is = conn.getInputStream();
@@ -29,7 +28,6 @@ public class ParseURLXMLByXPATH {
         //解析效率和Element没区别，就是写起来方便，内部封装了代码
         //Node是Element和Document的父接口
         Node node = doc.selectSingleNode("//company");
-        System.out.println("运营商是："+node.getText());
-
+        System.out.println("运营商是：" + node.getText());
     }
 }

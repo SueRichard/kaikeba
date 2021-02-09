@@ -23,7 +23,7 @@ public class GenerateXML {
         for (int i = 0; i < 100; i++) {
             Element wife = wives.addElement("wife");
             Element name = wife.addElement("name");
-            name.setText("胡蕾" + i + "号");
+            name.setText("hl" + i + "号");
             Element say = wife.addElement("say");
             say.setText("喜欢你" + i + "次");
             //加""是为了转换成字符串；追加属性

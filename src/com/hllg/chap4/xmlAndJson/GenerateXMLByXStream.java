@@ -16,9 +16,9 @@ public class GenerateXMLByXStream {
         Person hl = new Person("hl", 18, "喜欢你");
         //XStream的使用
         //  1. 创建XStream的对象
-            XStream x = new XStream();
+        XStream x = new XStream();
         //  2. 修改某个类型生成的节点名称（可选设置；默认是包名.类名）
-        x.alias("hl",Person.class);
+        x.alias("hl", Person.class);
         //  3. 传入对象开始生成
         String xml = x.toXML(hl);
         System.out.println(xml);

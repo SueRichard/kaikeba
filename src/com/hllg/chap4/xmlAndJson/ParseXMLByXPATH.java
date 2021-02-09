@@ -2,7 +2,6 @@ package com.hllg.chap4.xmlAndJson;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
@@ -29,7 +28,7 @@ public class ParseXMLByXPATH {
             System.out.println(names.get(i).getText());
         }
         System.out.println("--------------------");
-        Node node = doc.selectSingleNode("//person[@id='970201']//name");
-        System.out.println(node.getName()+"："+node.getText());
+        Node node = doc.selectSingleNode("//person[@id='002']//name");
+        System.out.println(node.getName() + "：" + node.getText());
     }
 }

@@ -2,8 +2,6 @@ package com.hllg.chap4.xmlAndJson;
 
 import com.google.gson.Gson;
 
-import java.time.Period;
-
 /**
  * @author HLLG
  * @version 1.0
