@@ -12,10 +12,11 @@ import java.io.IOException;
  */
 public class FileTest {
     public static void main(String[] args) throws IOException {
-        //File f = new File("l://1.txt");
+        File f = new File("l://1.txt");
         //创建新文件
-        //boolean flag = f.createNewFile();
-        //System.out.println(flag?"success":"failed");
+        boolean flag = f.createNewFile();
+        System.out.println(flag ? "success" : "failed");
+        System.out.println(f.getAbsolutePath());
         //删除需谨慎
         //f.delete();
 //        File f2= new File("l://hl");

@@ -32,7 +32,7 @@ public class FileFilterAnonymousInsideClassOptimize {
                 return false;
             }
         });
-        //下面不做判断，抛出空指针异常
+        //下面不做判断，可能会抛出空指针异常
         if (file != null && file.length > 0) {
             for (File f : file) {
                 if (f.isDirectory()) {
