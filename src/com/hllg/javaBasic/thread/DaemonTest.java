@@ -15,7 +15,7 @@ public class DaemonTest {
         //
         Thread t;
         t = new Thread(new MyRunnable(), "子线程");
-        //在启动之前设置为守护进程
+        //在启动之前设置为守护进程,main线程结束，t线程则结束
         t.setDaemon(true);
         t.start();
         for (int i = 0; i < 5; i++) {

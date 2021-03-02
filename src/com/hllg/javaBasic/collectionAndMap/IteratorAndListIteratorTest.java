@@ -10,7 +10,7 @@ import java.util.ListIterator;
  */
 public class IteratorAndListIteratorTest {
     public static void main(String[] args) {
-        //迭代器用于遍历集合，共2中
+        //迭代器用于遍历集合，共2种
         //1.Iterator，用于遍历collection下的所有集合
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);

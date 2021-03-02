@@ -71,7 +71,7 @@ public class ProducerConsumerProblem {
         private boolean flag = true;
 
         /**
-         * 对改方法追加同步，但却不能解决问题
+         * 对该方法追加同步，但却不能解决问题
          * 因为synchronized是非公平锁，当你厨师做完，并不一定能给到服务员线程，
          * 就导致厨师做了多个菜，但是没来得及端出，然后最后厨师先做完了，服务员在重复端厨师做的最后一个菜
          */
